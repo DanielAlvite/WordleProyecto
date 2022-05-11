@@ -28,18 +28,8 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         inicializarLabels();
-        test(0);
     }
     
-    public void test(int fila){
-      for(int i = 0 ; i < labels.length;i++){
-        JLabel[] label = labels[fila];
-        for(int j = 0;j < label.length;j++){
-            JLabel jLabel = label[j];
-            jLabel.setForeground(COLOR_ROJO);
-            }
-        }
-    }
     
     public final void inicializarLabels(){
         for(int i = 1;i <= MAX_INTENTOS;i++){
