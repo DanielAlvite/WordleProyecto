@@ -105,6 +105,13 @@ public class MainGUI extends javax.swing.JFrame {
         finaljLabel1 = new javax.swing.JLabel();
         errorjPanel4 = new javax.swing.JPanel();
         errorjLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuArchivo = new javax.swing.JMenu();
+        jMenuPartida = new javax.swing.JMenuItem();
+        jMenuI = new javax.swing.JMenu();
+        jMenuTest = new javax.swing.JMenuItem();
+        jMenuFichero = new javax.swing.JMenuItem();
+        jMenuBase = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Daw1_Wordle_Dani");
@@ -277,7 +284,7 @@ public class MainGUI extends javax.swing.JFrame {
         estadojPanel1.setLayout(new java.awt.GridLayout(3, 0));
 
         maljPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        maljPanel1.setLayout(new java.awt.GridLayout());
+        maljPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         maljLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         maljLabel1.setForeground(new java.awt.Color(204, 0, 0));
@@ -290,7 +297,7 @@ public class MainGUI extends javax.swing.JFrame {
         estadojPanel1.add(maljPanel1);
 
         existenjPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        existenjPanel2.setLayout(new java.awt.GridLayout());
+        existenjPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         existenjLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         existenjLabel1.setForeground(new java.awt.Color(204, 204, 0));
@@ -299,7 +306,7 @@ public class MainGUI extends javax.swing.JFrame {
         estadojPanel1.add(existenjPanel2);
 
         bienjPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        bienjPanel3.setLayout(new java.awt.GridLayout());
+        bienjPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         bienjLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         bienjLabel2.setForeground(new java.awt.Color(51, 153, 0));
@@ -315,6 +322,11 @@ public class MainGUI extends javax.swing.JFrame {
         inputjPanel2.add(palabrajTextField1);
 
         enviarjButton1.setText("Enviar");
+        enviarjButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarjButton1ActionPerformed(evt);
+            }
+        });
         inputjPanel2.add(enviarjButton1);
 
         bottomPanel.add(inputjPanel2);
@@ -349,6 +361,38 @@ public class MainGUI extends javax.swing.JFrame {
 
         mainJPanel.add(bottomPanel, java.awt.BorderLayout.PAGE_END);
 
+        jMenuArchivo.setText("Archivo");
+        jMenuArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuArchivoActionPerformed(evt);
+            }
+        });
+
+        jMenuPartida.setText("Nueva Partida");
+        jMenuArchivo.add(jMenuPartida);
+
+        jMenuBar1.add(jMenuArchivo);
+
+        jMenuI.setText("Motores");
+
+        jMenuTest.setText("Test");
+        jMenuTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuTestActionPerformed(evt);
+            }
+        });
+        jMenuI.add(jMenuTest);
+
+        jMenuFichero.setText("Fichero");
+        jMenuI.add(jMenuFichero);
+
+        jMenuBase.setText("Base datos");
+        jMenuI.add(jMenuBase);
+
+        jMenuBar1.add(jMenuI);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -357,11 +401,23 @@ public class MainGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuTestActionPerformed
+
+    private void jMenuArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuArchivoActionPerformed
+
+    private void enviarjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarjButton1ActionPerformed
+        
+    }//GEN-LAST:event_enviarjButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,6 +497,13 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6_3;
     private javax.swing.JLabel jLabel6_4;
     private javax.swing.JLabel jLabel6_5;
+    private javax.swing.JMenu jMenuArchivo;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuBase;
+    private javax.swing.JMenuItem jMenuFichero;
+    private javax.swing.JMenu jMenuI;
+    private javax.swing.JMenuItem jMenuPartida;
+    private javax.swing.JMenuItem jMenuTest;
     private javax.swing.JPanel letrasPanel;
     private javax.swing.JPanel mainJPanel;
     private javax.swing.JLabel maljLabel1;
