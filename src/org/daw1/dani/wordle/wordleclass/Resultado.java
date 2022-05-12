@@ -12,9 +12,7 @@ import java.util.Objects;
  */
 public enum Resultado
 {
-    MAL, 
-    EXISTE, 
-    OK;
+    MAL,EXISTE,BIEN;
     
     public static Resultado of(final int eleccion) {
         Objects.checkIndex(eleccion - 1, values().length);

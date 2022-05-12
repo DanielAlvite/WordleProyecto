@@ -7,7 +7,7 @@ package org.daw1.dani.wordle.gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
-
+import org.daw1.dani.wordle.wordleclass.IMotorIdioma;
 /**
  *
  * @author dani
@@ -20,6 +20,7 @@ public class MainGUI extends javax.swing.JFrame {
     
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
+    private static int numeroIntentos;
     
     private final javax.swing.JLabel[][] labels = new javax.swing.JLabel[MAX_INTENTOS][TAMANO_PALABRA];
     /**
@@ -29,6 +30,7 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         inicializarLabels();
     }
+    
     
     
     public final void inicializarLabels(){
@@ -99,12 +101,12 @@ public class MainGUI extends javax.swing.JFrame {
         bienjPanel3 = new javax.swing.JPanel();
         bienjLabel2 = new javax.swing.JLabel();
         inputjPanel2 = new javax.swing.JPanel();
-        palabrajTextField1 = new javax.swing.JTextField();
+        palabrajTextField = new javax.swing.JTextField();
         enviarjButton1 = new javax.swing.JButton();
-        exitojPanel3 = new javax.swing.JPanel();
-        finaljLabel1 = new javax.swing.JLabel();
+        exitojPanel = new javax.swing.JPanel();
+        finaljLabel = new javax.swing.JLabel();
         errorjPanel4 = new javax.swing.JPanel();
-        errorjLabel1 = new javax.swing.JLabel();
+        errorjLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
         jMenuPartida = new javax.swing.JMenuItem();
@@ -318,8 +320,13 @@ public class MainGUI extends javax.swing.JFrame {
 
         inputjPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        palabrajTextField1.setPreferredSize(new java.awt.Dimension(120, 24));
-        inputjPanel2.add(palabrajTextField1);
+        palabrajTextField.setPreferredSize(new java.awt.Dimension(120, 24));
+        palabrajTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                palabrajTextFieldActionPerformed(evt);
+            }
+        });
+        inputjPanel2.add(palabrajTextField);
 
         enviarjButton1.setText("Enviar");
         enviarjButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -331,31 +338,31 @@ public class MainGUI extends javax.swing.JFrame {
 
         bottomPanel.add(inputjPanel2);
 
-        exitojPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        exitojPanel3.setLayout(new java.awt.GridBagLayout());
+        exitojPanel.setBackground(new java.awt.Color(255, 255, 255));
+        exitojPanel.setLayout(new java.awt.GridBagLayout());
 
-        finaljLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        finaljLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        finaljLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        finaljLabel.setForeground(new java.awt.Color(0, 102, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(16, 90, 16, 91);
-        exitojPanel3.add(finaljLabel1, gridBagConstraints);
+        exitojPanel.add(finaljLabel, gridBagConstraints);
 
-        bottomPanel.add(exitojPanel3);
+        bottomPanel.add(exitojPanel);
 
         errorjPanel4.setBackground(new java.awt.Color(255, 255, 255));
         errorjPanel4.setLayout(new java.awt.GridBagLayout());
 
-        errorjLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        errorjLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        errorjLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        errorjLabel.setForeground(new java.awt.Color(204, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(16, 95, 16, 96);
-        errorjPanel4.add(errorjLabel1, gridBagConstraints);
+        errorjPanel4.add(errorjLabel, gridBagConstraints);
 
         bottomPanel.add(errorjPanel4);
 
@@ -416,8 +423,42 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuArchivoActionPerformed
 
     private void enviarjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarjButton1ActionPerformed
-        
+        this.errorjLabel.setText("");
+        String insertada = this.palabrajTextField.getText().toUpperCase();
+        if (insertada.length() != 5) {
+            this.errorjLabel.setText("Inserte una palabra de 5 letras");
+        }
+        else if (this.IMotorIdioma.checkPalabra(insertada)) {
+            int n=numeroIntentos;
+            numeroIntentos++;
+            if (insertada.equals(this.palabrajTextField)) {
+                this.finaljLabel.setText("Ganaste en " + numeroIntentos + " intentos");
+                this.finaljLabel.setVisible(true);
+                this.enviarjButton1.setEnabled(false);
+                this.palabrajTextField.setEnabled(false);
+            }
+            else {
+                this.palabrajTextField.setText("");
+                if (this.numeroIntentos == 6) {
+                    this.finaljLabel.setText("¡Has perdido!");
+                    this.finaljLabel.setForeground(MainGUI.COLOR_ROJO);
+                    this.finaljLabel.setVisible(true);
+                    this.finaljLabel.setEnabled(false);
+                    this.palabrajTextField.setEnabled(false);
+                }
+                else {
+                    this.palabrajTextField.requestFocus();
+                }
+            }
+        }
+        else {
+            this.errorjLabel.setText("La palabra insertada no existe");
+        }
     }//GEN-LAST:event_enviarjButton1ActionPerformed
+
+    private void palabrajTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palabrajTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_palabrajTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -459,13 +500,13 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel bienjPanel3;
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JButton enviarjButton1;
-    private javax.swing.JLabel errorjLabel1;
+    private javax.swing.JLabel errorjLabel;
     private javax.swing.JPanel errorjPanel4;
     private javax.swing.JPanel estadojPanel1;
     private javax.swing.JLabel existenjLabel1;
     private javax.swing.JPanel existenjPanel2;
-    private javax.swing.JPanel exitojPanel3;
-    private javax.swing.JLabel finaljLabel1;
+    private javax.swing.JPanel exitojPanel;
+    private javax.swing.JLabel finaljLabel;
     private javax.swing.JPanel inputjPanel2;
     private javax.swing.JLabel jLabel1_1;
     private javax.swing.JLabel jLabel1_2;
@@ -508,6 +549,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel mainJPanel;
     private javax.swing.JLabel maljLabel1;
     private javax.swing.JPanel maljPanel1;
-    private javax.swing.JTextField palabrajTextField1;
+    private javax.swing.JTextField palabrajTextField;
     // End of variables declaration//GEN-END:variables
 }
