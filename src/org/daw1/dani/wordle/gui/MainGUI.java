@@ -4,10 +4,16 @@
  */
 package org.daw1.dani.wordle.gui;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import org.daw1.dani.wordle.wordleclass.IMotorIdioma;
+import org.daw1.dani.wordle.wordleclass.Resultado;
+import org.daw1.dani.wordle.wordleclass.IMotorTest;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author dani
@@ -17,10 +23,16 @@ public class MainGUI extends javax.swing.JFrame {
     private static java.awt.Color COLOR_VERDE = new java.awt.Color(51,102,0);
     private static java.awt.Color COLOR_AMARILLO = new java.awt.Color(204,204,0);
     private static java.awt.Color COLOR_ROJO = new java.awt.Color(204,0,0);
+     private static java.awt.Color COLOR_DEFAULT = new java.awt.Color(187,187,187);
     
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
+    private IMotorTest motorTest = new IMotorTest();
     private static int numeroIntentos;
+    private static String palabra;
+    
+    private Map<Resultado, JLabel> resultadoLabels;
+    private Map<Resultado, Set<Character>> letra;
     
     private final javax.swing.JLabel[][] labels = new javax.swing.JLabel[MAX_INTENTOS][TAMANO_PALABRA];
     /**
@@ -29,6 +41,8 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         inicializarLabels();
+        this.palabra = this.motorTest.obtenerPalabraAleatoria().getValue().toUpperCase();
+        jRadioButtonMenuItem1.setSelected(false);
     }
     
     
@@ -109,7 +123,7 @@ public class MainGUI extends javax.swing.JFrame {
         errorjLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
-        jMenuPartida = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuI = new javax.swing.JMenu();
         jMenuTest = new javax.swing.JMenuItem();
         jMenuFichero = new javax.swing.JMenuItem();
@@ -375,8 +389,14 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jMenuPartida.setText("Nueva Partida");
-        jMenuArchivo.add(jMenuPartida);
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuArchivo.add(jRadioButtonMenuItem1);
 
         jMenuBar1.add(jMenuArchivo);
 
@@ -428,10 +448,11 @@ public class MainGUI extends javax.swing.JFrame {
         if (insertada.length() != 5) {
             this.errorjLabel.setText("Inserte una palabra de 5 letras");
         }
-        else if (this.IMotorIdioma.checkPalabra(insertada)) {
-            int n=numeroIntentos;
+        else if (this.motorTest.checkPalabra(insertada)) {
+            procesarPalabraInterfaz(insertada, numeroIntentos);
             numeroIntentos++;
-            if (insertada.equals(this.palabrajTextField)) {
+            if (insertada.equals(this.palabra)) {
+                this.exitojPanel.setVisible(true);
                 this.finaljLabel.setText("Ganaste en " + numeroIntentos + " intentos");
                 this.finaljLabel.setVisible(true);
                 this.enviarjButton1.setEnabled(false);
@@ -440,10 +461,11 @@ public class MainGUI extends javax.swing.JFrame {
             else {
                 this.palabrajTextField.setText("");
                 if (this.numeroIntentos == 6) {
+                    this.exitojPanel.setVisible(true);
                     this.finaljLabel.setText("¡Has perdido!");
                     this.finaljLabel.setForeground(MainGUI.COLOR_ROJO);
                     this.finaljLabel.setVisible(true);
-                    this.finaljLabel.setEnabled(false);
+                    this.enviarjButton1.setEnabled(false);
                     this.palabrajTextField.setEnabled(false);
                 }
                 else {
@@ -460,6 +482,93 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_palabrajTextFieldActionPerformed
 
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        if(jRadioButtonMenuItem1.isSelected()){
+           jRadioButtonMenuItem1.setSelected(false);
+           resetJuego();
+       }
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void resetJuego(){
+        for(int i = 1;i <= MAX_INTENTOS;i++){
+            for(int j = 1;j <= TAMANO_PALABRA;j++){
+                labels[i-1][j-1].setText("A");
+                labels[i-1][j-1].setForeground(COLOR_DEFAULT);
+            }
+        }
+        this.enviarjButton1.setEnabled(true);
+        this.palabrajTextField.setEnabled(true);
+        this.exitojPanel.setVisible(false);
+        this.finaljLabel.setVisible(false);
+        
+    }
+        
+     private void procesarPalabraInterfaz(final String insertada, final int intento) {
+        for (int i = 0; i < 5; i++) {
+            final char c = insertada.charAt(i);
+            this.labels[intento][i].setText(String.valueOf(c));
+            if (this.palabra.charAt(i) == c) {
+                this.labels[intento][i].setForeground(COLOR_VERDE);
+//                this.letra.get(Resultado.EXISTE).remove(c);
+//                this.letra.get(Resultado.BIEN).add(c);
+            }
+            else if (this.palabra.contains(String.valueOf(c))) {
+                //if (!this.letra.get(Resultado.BIEN).contains(c)) {
+                    this.labels[intento][i].setForeground(COLOR_AMARILLO);
+//                    this.letra.get(Resultado.EXISTE).add(c);
+//                }
+            }
+            else {
+                this.labels[intento][i].setForeground(COLOR_ROJO);
+//                this.letra.get(Resultado.MAL).add(c);
+            }
+        }
+    }
+     
+     private void procesarConjuntosPalabras() {
+        for (final Resultado r : Resultado.values()) {
+            this.procesarConjuntoPalabra(r);
+        }
+    }
+     
+    private void procesarConjuntoPalabra(final Resultado r) {
+        final StringBuilder sb = new StringBuilder();
+        for (final Character c : this.letra.get(r)) {
+            sb.append(c).append(" ");
+        }
+        this.resultadoLabels.get(r).setText(sb.toString());
+    }
+     
+     
+     
+     private void refreshGrid(final JLabel label, final char caracter, final Resultado r) {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("Lanza hilo");
+                    MainGUI.this.refreshGrid(label, caracter, r);
+                }
+            });
+            return;
+        }
+        label.setText(String.valueOf(caracter));
+        if (r.equals(Resultado.BIEN)) {
+            label.setForeground(MainGUI.COLOR_VERDE);
+        }
+        else if (r.equals(Resultado.EXISTE)) {
+            if (!this.letra.get(Resultado.BIEN).contains(caracter)) {
+                label.setForeground(MainGUI.COLOR_AMARILLO);
+            }
+        }
+        else {
+            label.setForeground(MainGUI.COLOR_ROJO);
+        }
+        label.setVisible(true);
+     }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -543,8 +652,8 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuBase;
     private javax.swing.JMenuItem jMenuFichero;
     private javax.swing.JMenu jMenuI;
-    private javax.swing.JMenuItem jMenuPartida;
     private javax.swing.JMenuItem jMenuTest;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JPanel letrasPanel;
     private javax.swing.JPanel mainJPanel;
     private javax.swing.JLabel maljLabel1;
