@@ -8,9 +8,13 @@ package org.daw1.dani.wordle.wordleclass;
  *
  * @author dani
  */
-public interface IMotorIdioma {
+public interface IMotor {
     
     public boolean checkPalabra(String palabra);
+    
+    public boolean addPalabra(String palabra);
+    
+    public boolean removePalabra(String palabra);
     
     public FixedLengthString obtenerPalabraAleatoria();
     

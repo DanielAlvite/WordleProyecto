@@ -9,10 +9,12 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
-import org.daw1.dani.wordle.wordleclass.IMotorIdioma;
+import org.daw1.dani.wordle.wordleclass.IMotor;
 import org.daw1.dani.wordle.wordleclass.Resultado;
-import org.daw1.dani.wordle.wordleclass.IMotorTest;
+import org.daw1.dani.wordle.wordleclass.MotorTest;
 import javax.swing.SwingUtilities;
+import org.daw1.dani.wordle.wordleclass.MotorArchivo;
+import org.daw1.dani.wordle.wordleclass.MotorBD;
 
 /**
  *
@@ -27,7 +29,9 @@ public class MainGUI extends javax.swing.JFrame {
     
     private static final int MAX_INTENTOS = 6;
     private static final int TAMANO_PALABRA = 5;
-    private IMotorTest motorTest = new IMotorTest();
+    private IMotor motorTest = new MotorTest();
+    private IMotor motorArchivo = new MotorArchivo();
+    private IMotor motorBD = new MotorBD();
     private static int numeroIntentos;
     private static String palabra;
     
@@ -43,6 +47,10 @@ public class MainGUI extends javax.swing.JFrame {
         inicializarLabels();
         this.palabra = this.motorTest.obtenerPalabraAleatoria().getValue().toUpperCase();
         jRadioButtonMenuItem1.setSelected(false);
+        jRadioButtonTest.setSelected(true);
+        jRadioButtonArchivo.setSelected(false);
+        jRadioButtonBaseDatos.setSelected(false);
+        jRadioButtonEditarMotor.setSelected(false);
     }
     
     
@@ -125,9 +133,10 @@ public class MainGUI extends javax.swing.JFrame {
         jMenuArchivo = new javax.swing.JMenu();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuI = new javax.swing.JMenu();
-        jMenuTest = new javax.swing.JMenuItem();
-        jMenuFichero = new javax.swing.JMenuItem();
-        jMenuBase = new javax.swing.JMenuItem();
+        jRadioButtonTest = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonArchivo = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonBaseDatos = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonEditarMotor = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Daw1_Wordle_Dani");
@@ -402,19 +411,41 @@ public class MainGUI extends javax.swing.JFrame {
 
         jMenuI.setText("Motores");
 
-        jMenuTest.setText("Test");
-        jMenuTest.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonTest.setSelected(true);
+        jRadioButtonTest.setText("Test");
+        jRadioButtonTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuTestActionPerformed(evt);
+                jRadioButtonTestActionPerformed(evt);
             }
         });
-        jMenuI.add(jMenuTest);
+        jMenuI.add(jRadioButtonTest);
 
-        jMenuFichero.setText("Fichero");
-        jMenuI.add(jMenuFichero);
+        jRadioButtonArchivo.setSelected(true);
+        jRadioButtonArchivo.setText("Archivo");
+        jRadioButtonArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonArchivoActionPerformed(evt);
+            }
+        });
+        jMenuI.add(jRadioButtonArchivo);
 
-        jMenuBase.setText("Base datos");
-        jMenuI.add(jMenuBase);
+        jRadioButtonBaseDatos.setSelected(true);
+        jRadioButtonBaseDatos.setText("BaseDatos");
+        jRadioButtonBaseDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBaseDatosActionPerformed(evt);
+            }
+        });
+        jMenuI.add(jRadioButtonBaseDatos);
+
+        jRadioButtonEditarMotor.setSelected(true);
+        jRadioButtonEditarMotor.setText("Administrar motor");
+        jRadioButtonEditarMotor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonEditarMotorActionPerformed(evt);
+            }
+        });
+        jMenuI.add(jRadioButtonEditarMotor);
 
         jMenuBar1.add(jMenuI);
 
@@ -433,10 +464,6 @@ public class MainGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTestActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuTestActionPerformed
 
     private void jMenuArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuArchivoActionPerformed
         // TODO add your handling code here:
@@ -489,6 +516,40 @@ public class MainGUI extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
+    private void jRadioButtonTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTestActionPerformed
+        if(this.jRadioButtonTest.isSelected()){
+          this.motorTest = new MotorTest();
+          this.jRadioButtonArchivo.setSelected(false);
+          this.jRadioButtonBaseDatos.setSelected(false);
+          resetJuego();
+      }
+    }//GEN-LAST:event_jRadioButtonTestActionPerformed
+
+    private void jRadioButtonArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonArchivoActionPerformed
+       if(this.jRadioButtonArchivo.isSelected()){
+          this.motorArchivo = new MotorArchivo();
+          this.jRadioButtonTest.setSelected(false);
+          this.jRadioButtonBaseDatos.setSelected(false);
+          resetJuego();
+      }
+    }//GEN-LAST:event_jRadioButtonArchivoActionPerformed
+
+    private void jRadioButtonBaseDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBaseDatosActionPerformed
+        if(this.jRadioButtonBaseDatos.isSelected()){
+          this.motorBD = new MotorBD();
+          this.jRadioButtonArchivo.setSelected(false);
+          this.jRadioButtonTest.setSelected(false);
+          resetJuego();
+      }
+    }//GEN-LAST:event_jRadioButtonBaseDatosActionPerformed
+
+    private void jRadioButtonEditarMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEditarMotorActionPerformed
+        if(this.jRadioButtonEditarMotor.isSelected()){
+            AdministrarMotor ADmotor = new AdministrarMotor(this, rootPaneCheckingEnabled);
+            ADmotor.setVisible(true);
+        }
+    }//GEN-LAST:event_jRadioButtonEditarMotorActionPerformed
+
     private void resetJuego(){
         for(int i = 1;i <= MAX_INTENTOS;i++){
             for(int j = 1;j <= TAMANO_PALABRA;j++){
@@ -500,8 +561,11 @@ public class MainGUI extends javax.swing.JFrame {
         this.palabrajTextField.setEnabled(true);
         this.exitojPanel.setVisible(false);
         this.finaljLabel.setVisible(false);
-        
+        this.numeroIntentos = 0;
     }
+    
+    
+    
         
      private void procesarPalabraInterfaz(final String insertada, final int intento) {
         for (int i = 0; i < 5; i++) {
@@ -509,18 +573,19 @@ public class MainGUI extends javax.swing.JFrame {
             this.labels[intento][i].setText(String.valueOf(c));
             if (this.palabra.charAt(i) == c) {
                 this.labels[intento][i].setForeground(COLOR_VERDE);
-//                this.letra.get(Resultado.EXISTE).remove(c);
-//                this.letra.get(Resultado.BIEN).add(c);
+                this.letra.get(Resultado.EXISTE).remove(c);
+                this.letra.get(Resultado.BIEN).add(c);
             }
             else if (this.palabra.contains(String.valueOf(c))) {
-                //if (!this.letra.get(Resultado.BIEN).contains(c)) {
+                if (!this.letra.get(Resultado.BIEN).contains(c)) {
                     this.labels[intento][i].setForeground(COLOR_AMARILLO);
-//                    this.letra.get(Resultado.EXISTE).add(c);
-//                }
+                    this.letra.get(Resultado.EXISTE).add(c);
+                }
             }
             else {
                 this.labels[intento][i].setForeground(COLOR_ROJO);
-//                this.letra.get(Resultado.MAL).add(c);
+                this.letra.get(Resultado.MAL).add(c);
+                this.maljLabel1.setText(letra.get(Resultado.MAL).toString());
             }
         }
     }
@@ -649,11 +714,12 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6_5;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuBase;
-    private javax.swing.JMenuItem jMenuFichero;
     private javax.swing.JMenu jMenuI;
-    private javax.swing.JMenuItem jMenuTest;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonArchivo;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonBaseDatos;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonEditarMotor;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonTest;
     private javax.swing.JPanel letrasPanel;
     private javax.swing.JPanel mainJPanel;
     private javax.swing.JLabel maljLabel1;

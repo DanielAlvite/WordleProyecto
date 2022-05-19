@@ -4,28 +4,29 @@
  */
 package org.daw1.dani.wordle.wordleclass;
 
+import java.util.Objects;
+
 /**
  *
  * @author dani
  */
-public class FixedLengthString {
-    private final static int LENGTH = 5 ;
+public class FixedLengthString
+{
+    private static final int LENGTH = 5;
     private String value;
     
-    
-    public FixedLengthString (String value) {
-        java.util.Objects.requireNonNull(value);
-        if(value.length() !=LENGTH ){
-            throw new IllegalArgumentException("solo valen palabras con un tamaño de " + LENGTH + " letras");
+    public FixedLengthString(final String value) {
+        Objects.requireNonNull(value);
+        if (value.length() != 5) {
+            throw new IllegalArgumentException("Only 5 letter words are allowed");
         }
-        else if(!value.matches("[A-Za-z]{5}")){
-            throw new IllegalArgumentException("solo se permiten letras de A-Z");
+        if (!value.matches("[A-Za-z]{5}")) {
+            throw new IllegalArgumentException("Only A-Z a-z are allowed");
         }
-        this.value=value;
-    
-    }
-    public String getValue(){
-        return value;
+        this.value = value;
     }
     
+    public String getValue() {
+        return this.value;
+    }
 }
