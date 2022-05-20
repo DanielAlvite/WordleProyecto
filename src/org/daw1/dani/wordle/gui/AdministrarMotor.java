@@ -4,6 +4,10 @@
  */
 package org.daw1.dani.wordle.gui;
 
+import org.daw1.dani.wordle.gui.MainGUI;
+import static org.daw1.dani.wordle.gui.MainGUI.COLOR_ROJO;
+import static org.daw1.dani.wordle.gui.MainGUI.COLOR_VERDE;
+import org.daw1.dani.wordle.wordleclass.IMotor;
 /**
  *
  * @author dani
@@ -13,6 +17,8 @@ public class AdministrarMotor extends javax.swing.JDialog {
     /**
      * Creates new form AdministrarMotor
      */
+    private IMotor tipoMotor = MainGUI.getTipoMotor();
+    
     public AdministrarMotor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -50,16 +56,24 @@ public class AdministrarMotor extends javax.swing.JDialog {
 
         cuerpojPanel.setLayout(new java.awt.GridLayout(2, 1));
 
+        anadirjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         anadirjPanel.setLayout(new java.awt.GridLayout(2, 1));
 
-        insertarjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        anadirjTextField.setText("jTextField1");
         anadirjTextField.setPreferredSize(new java.awt.Dimension(160, 23));
+        anadirjTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anadirjTextFieldActionPerformed(evt);
+            }
+        });
         insertarjPanel.add(anadirjTextField);
 
         anadir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        anadir.setText("jButton1");
+        anadir.setText("Añadir");
+        anadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anadirActionPerformed(evt);
+            }
+        });
         insertarjPanel.add(anadir);
 
         anadirjPanel.add(insertarjPanel);
@@ -73,16 +87,20 @@ public class AdministrarMotor extends javax.swing.JDialog {
 
         cuerpojPanel.add(anadirjPanel);
 
+        borrarjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         borrarjPanel.setLayout(new java.awt.GridLayout(2, 1));
-
-        borradojPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         borrarjTextField.setText("jTextField2");
         borrarjTextField.setPreferredSize(new java.awt.Dimension(160, 23));
         borradojPanel.add(borrarjTextField);
 
         borrarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        borrarButton.setText("jButton2");
+        borrarButton.setText("Borrar");
+        borrarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarButtonActionPerformed(evt);
+            }
+        });
         borradojPanel.add(borrarButton);
 
         borrarjPanel.add(borradojPanel);
@@ -123,6 +141,41 @@ public class AdministrarMotor extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirActionPerformed
+        this.estadoInsertar.setVisible(false);
+        if(!tipoMotor.checkPalabra(this.anadirjTextField.getText())){
+            if(this.anadirjTextField.getText().length() != 5){
+                this.estadoInsertar.setText("La palabra tiene que ser de 5 letras");
+                this.estadoInsertar.setForeground(COLOR_ROJO);
+                this.estadoInsertar.setVisible(true);
+            }else if(!this.anadirjTextField.getText().matches("[A-Za-z]{5}")){
+                this.estadoInsertar.setText("La palabra solo puede llevar letras");
+                this.estadoInsertar.setForeground(COLOR_ROJO);
+                this.estadoInsertar.setVisible(true);
+            }else{
+                tipoMotor.addPalabra(this.anadirjTextField.getText());
+                this.estadoInsertar.setText("La palabra fue agregada con exito");
+                this.estadoInsertar.setForeground(COLOR_VERDE);
+                this.estadoInsertar.setVisible(true);
+            } 
+        }else{
+            this.estadoInsertar.setText("La palabra ya existe no puedes agregarla");
+            this.estadoInsertar.setForeground(COLOR_ROJO);
+            this.estadoInsertar.setVisible(true);
+        }
+
+            
+        
+    }//GEN-LAST:event_anadirActionPerformed
+
+    private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarButtonActionPerformed
+
+    private void anadirjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirjTextFieldActionPerformed
+        
+    }//GEN-LAST:event_anadirjTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

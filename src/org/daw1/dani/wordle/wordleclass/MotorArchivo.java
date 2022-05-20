@@ -14,15 +14,22 @@ import java.lang.Math;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import org.daw1.dani.wordle.gui.AdministrarMotor;
 /**
  *
  * @author dani
  */
 public class MotorArchivo implements IMotor{
     
+    private String ruta = "." + File.separator + "Data" + File.separator + "palabra.txt";
+    private List<String> palabra = new ArrayList<>();
+    Random rn = new Random();
     
-    public boolean crearFicheroTexto(String ruta, String texto){ 
-            try(Writer bw = new BufferedWriter(new FileWriter(ruta))){
+    public boolean crearArchivo(String texto){ 
+       if(!existeArchivo() && existeCarpetaPadre()){ 
+        try(Writer bw = new BufferedWriter(new FileWriter(ruta))){
                 bw.write(texto);
                 return true;
             } catch (IOException ex) {
@@ -30,31 +37,89 @@ public class MotorArchivo implements IMotor{
                 return false;
             }
       
-        }        
-
+        }
+       else{
+           return false;
+       }
+    }
     
-    @Override
-    public boolean checkPalabra(String palabra){
-        throw new UnsupportedOperationException("");
+    
+    
+    private boolean existeArchivo() {
+        File f = new File (ruta);
+        return f.exists();
+                }
+
+    private boolean existeCarpetaPadre() {
+        File f = new File (ruta);
+        return f.getParentFile().exists();
                 }
     
+    
+       public boolean addPalabra(String texto){
+        if(existeArchivo() && !checkPalabra(texto) && existeCarpetaPadre()){
+            try(Writer wr = new BufferedWriter(new FileWriter(ruta, true))){
+                wr.write(texto.toUpperCase());
+                return true;
+            } catch (IOException ex) {
+                Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+       
+    
     @Override
-    public boolean addPalabra(String palabra){
+    public boolean removePalabra(String texto){
         
     }
     
-    @Override
-    public boolean removePalabra(String palabra){
-        if(file.exists()){
-            return false;
-        }
-        
-    }
+ 
     
     @Override
     public FixedLengthString obtenerPalabraAleatoria(){
-        int random = (int) Math.random()*palabra.size();
-        return palabra.get(random);
+            try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
+                StringBuilder sb = new StringBuilder();
+                String linea = br.readLine();
+                while(linea != null){
+                    sb.append(linea).append("\n");
+                    linea = br.readLine();
+                   
+                }
+                  int nr = rn.nextInt(palabra.size());
+                  System.out.println(palabra.get(nr));
+                  return new FixedLengthString(palabra.get(nr));
+            } catch (IOException ex) {
+                Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                return null;
+            }
+        }
+ 
+    @Override
+    public boolean checkPalabra(String texto) {
+         boolean exists = false;
+           
+        try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
+                String linea = br.readLine();
+                while(linea != null && exists == false){
+                    if(linea != null){
+                        palabra.add(linea);
+                    }
+                   linea = br.readLine();
+                   if(palabra.contains(texto)){
+                       exists = true;
+                   }
+                   
+                }
+                return exists;
+            } catch (IOException ex) {
+                Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
     }
     
 }
