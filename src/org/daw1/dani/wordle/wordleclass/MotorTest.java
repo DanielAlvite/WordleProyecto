@@ -18,8 +18,8 @@ public class MotorTest implements IMotor{
     }
     
     @Override
-    public FixedLengthString obtenerPalabraAleatoria() {
-        return new FixedLengthString("CICLO");
+    public String obtenerPalabraAleatoria() {
+        return new String("CICLO");
     }
 
     @Override

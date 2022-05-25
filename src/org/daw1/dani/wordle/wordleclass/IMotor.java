@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package org.daw1.dani.wordle.wordleclass;
-
+import java.sql.SQLException;
 /**
  *
  * @author dani
@@ -16,6 +16,6 @@ public interface IMotor {
     
     public boolean removePalabra(String palabra);
     
-    public FixedLengthString obtenerPalabraAleatoria();
+    public String obtenerPalabraAleatoria()throws SQLException;
     
 }

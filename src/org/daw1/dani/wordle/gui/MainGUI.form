@@ -46,13 +46,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonArchivoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonBaseDatos">
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonBaseDatosESP">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
-                <Property name="text" type="java.lang.String" value="BaseDatos"/>
+                <Property name="text" type="java.lang.String" value="BaseDatos_ESPA&#xd1;OL"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonBaseDatosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonBaseDatosESPActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonBaseDatosGAL">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="BaseDatos_GALEGO"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonBaseDatosGALActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonEditarMotor">
@@ -93,7 +102,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="mainJPanel" alignment="0" pref="494" max="32767" attributes="0"/>
+          <Component id="mainJPanel" alignment="0" pref="766" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -135,7 +144,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1_2">
@@ -144,7 +152,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1_3">
@@ -153,7 +160,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1_4">
@@ -162,7 +168,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1_5">
@@ -171,7 +176,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2_1">
@@ -180,7 +184,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2_2">
@@ -189,7 +192,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2_3">
@@ -198,7 +200,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2_4">
@@ -207,7 +208,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2_5">
@@ -216,7 +216,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3_1">
@@ -225,7 +224,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3_2">
@@ -234,7 +232,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3_3">
@@ -243,7 +240,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3_4">
@@ -252,7 +248,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3_5">
@@ -261,7 +256,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4_1">
@@ -270,7 +264,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4_2">
@@ -279,7 +272,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4_3">
@@ -288,7 +280,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4_4">
@@ -297,7 +288,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4_5">
@@ -306,7 +296,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5_1">
@@ -315,7 +304,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5_2">
@@ -324,7 +312,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5_3">
@@ -333,7 +320,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5_4">
@@ -342,7 +328,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5_5">
@@ -351,7 +336,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6_1">
@@ -360,7 +344,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6_2">
@@ -369,7 +352,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6_3">
@@ -378,7 +360,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6_4">
@@ -387,7 +368,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6_5">
@@ -396,7 +376,6 @@
                   <Font name="Dialog" size="48" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="A"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -592,6 +571,12 @@
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[2147483647, 2147483647]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[191, 32]"/>
                     </Property>
                   </Properties>
                   <Constraints>

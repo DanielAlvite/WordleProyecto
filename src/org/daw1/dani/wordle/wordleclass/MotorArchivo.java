@@ -14,6 +14,7 @@ import java.lang.Math;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import org.daw1.dani.wordle.gui.AdministrarMotor;
@@ -26,21 +27,18 @@ public class MotorArchivo implements IMotor{
     private String ruta = "." + File.separator + "Data" + File.separator + "palabra.txt";
     private List<String> palabra = new ArrayList<>();
     Random rn = new Random();
+    File f = new File(ruta);
     
-    public boolean crearArchivo(String texto){ 
-       if(!existeArchivo() && existeCarpetaPadre()){ 
-        try(Writer bw = new BufferedWriter(new FileWriter(ruta))){
-                bw.write(texto);
-                return true;
+    public MotorArchivo(){
+        try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
+                String linea = br.readLine();
+                while(linea != null){
+                    palabra.add(linea);
+                    linea = br.readLine(); 
+                }
             } catch (IOException ex) {
                 Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
             }
-      
-        }
-       else{
-           return false;
-       }
     }
     
     
@@ -59,7 +57,8 @@ public class MotorArchivo implements IMotor{
        public boolean addPalabra(String texto){
         if(existeArchivo() && !checkPalabra(texto) && existeCarpetaPadre()){
             try(Writer wr = new BufferedWriter(new FileWriter(ruta, true))){
-                wr.write(texto.toUpperCase());
+                wr.write("\n"+texto.toUpperCase());
+                palabra.add(texto);
                 return true;
             } catch (IOException ex) {
                 Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,51 +74,60 @@ public class MotorArchivo implements IMotor{
     
     @Override
     public boolean removePalabra(String texto){
+        texto = texto.toUpperCase();
+        if (!palabra.contains(texto.toUpperCase())) {
+            return false;
+        }
         
-    }
-    
- 
-    
-    @Override
-    public FixedLengthString obtenerPalabraAleatoria(){
-            try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
-                StringBuilder sb = new StringBuilder();
-                String linea = br.readLine();
-                while(linea != null){
-                    sb.append(linea).append("\n");
-                    linea = br.readLine();
-                   
-                }
-                  int nr = rn.nextInt(palabra.size());
-                  System.out.println(palabra.get(nr));
-                  return new FixedLengthString(palabra.get(nr));
-            } catch (IOException ex) {
-                Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
-                return null;
+        Iterator<String> it = palabra.iterator();
+        while (it.hasNext()) {
+            String next = it.next();
+            if (texto.equals(next)) {
+                it.remove();
             }
         }
- 
-    @Override
-    public boolean checkPalabra(String texto) {
-         boolean exists = false;
-           
-        try(BufferedReader br = new BufferedReader(new FileReader(ruta))){
-                String linea = br.readLine();
-                while(linea != null && exists == false){
-                    if(linea != null){
-                        palabra.add(linea);
-                    }
-                   linea = br.readLine();
-                   if(palabra.contains(texto)){
-                       exists = true;
-                   }
-                   
-                }
-                return exists;
+       
+        String palabras = "";
+        for (String palabra1 : palabra) {
+            palabras += palabra1.toUpperCase() + "\n";
+        }
+        if (!f.exists()) {
+            f.getParentFile().mkdirs();
+            try {
+                f.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
+        }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(f));) {
+            bw.append(palabras.toUpperCase());
+            return true;
+        } catch (IOException ex) {
+            Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    
+    }
+    
+ 
+    
+
+    
+    @Override
+    public String obtenerPalabraAleatoria(){
+             int nr = rn.nextInt(palabra.size());
+                String palabraAl = palabra.get(nr);
+                return palabraAl;
+        }
+ 
+    @Override
+    public boolean checkPalabra(String texto) {
+        boolean exists = false;
+        if(palabra.contains(texto.toUpperCase())){
+          exists = true;
+        } 
+        return exists;  
     }
     
 }

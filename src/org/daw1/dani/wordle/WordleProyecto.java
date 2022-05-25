@@ -4,6 +4,8 @@
  */
 package org.daw1.dani.wordle;
 
+import org.daw1.dani.wordle.gui.MainGUI;
+
 /**
  *
  * @author dani
@@ -14,7 +16,8 @@ public class WordleProyecto {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+         MainGUI main = new MainGUI();
+        main.setVisible(true);
     }
     
 }

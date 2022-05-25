@@ -17,7 +17,7 @@ public class AdministrarMotor extends javax.swing.JDialog {
     /**
      * Creates new form AdministrarMotor
      */
-    private IMotor tipoMotor = MainGUI.getTipoMotor();
+    private IMotor tipoMotor ;
     
     public AdministrarMotor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -78,9 +78,11 @@ public class AdministrarMotor extends javax.swing.JDialog {
 
         anadirjPanel.add(insertarjPanel);
 
+        estadoInsertarjPanel.setMinimumSize(new java.awt.Dimension(155, 34));
         estadoInsertarjPanel.setLayout(new java.awt.GridBagLayout());
 
-        estadoInsertar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        estadoInsertar.setText("_______");
+        estadoInsertar.setMinimumSize(new java.awt.Dimension(155, 34));
         estadoInsertarjPanel.add(estadoInsertar, new java.awt.GridBagConstraints());
 
         anadirjPanel.add(estadoInsertarjPanel);
@@ -90,8 +92,14 @@ public class AdministrarMotor extends javax.swing.JDialog {
         borrarjPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         borrarjPanel.setLayout(new java.awt.GridLayout(2, 1));
 
-        borrarjTextField.setText("jTextField2");
+        borradojPanel.setMinimumSize(new java.awt.Dimension(155, 34));
+
         borrarjTextField.setPreferredSize(new java.awt.Dimension(160, 23));
+        borrarjTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarjTextFieldActionPerformed(evt);
+            }
+        });
         borradojPanel.add(borrarjTextField);
 
         borrarButton.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -105,9 +113,11 @@ public class AdministrarMotor extends javax.swing.JDialog {
 
         borrarjPanel.add(borradojPanel);
 
+        estadoBorrado.setMinimumSize(new java.awt.Dimension(155, 34));
         estadoBorrado.setLayout(new java.awt.GridBagLayout());
 
-        estadoBorrar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        estadoBorrar.setText("_______");
+        estadoBorrar.setMinimumSize(new java.awt.Dimension(155, 34));
         estadoBorrado.add(estadoBorrar, new java.awt.GridBagConstraints());
 
         borrarjPanel.add(estadoBorrado);
@@ -164,18 +174,40 @@ public class AdministrarMotor extends javax.swing.JDialog {
             this.estadoInsertar.setForeground(COLOR_ROJO);
             this.estadoInsertar.setVisible(true);
         }
-
-            
-        
+          
     }//GEN-LAST:event_anadirActionPerformed
 
     private void borrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarButtonActionPerformed
-        // TODO add your handling code here:
+       this.estadoBorrar.setVisible(false);
+        if(tipoMotor.checkPalabra(this.borrarjTextField.getText())){
+            if(this.borrarjTextField.getText().length() != 5){
+                this.estadoBorrar.setText("solo palabras de 5 letras");
+                this.estadoBorrar.setForeground(COLOR_ROJO);
+                this.estadoBorrar.setVisible(true);
+            }else if(!this.borrarjTextField.getText().matches("[A-Za-z]{5}")){
+                this.estadoBorrar.setText("solo puede llevar letras");
+                this.estadoBorrar.setForeground(COLOR_ROJO);
+                this.estadoBorrar.setVisible(true);
+            }else{
+                tipoMotor.removePalabra(this.borrarjTextField.getText().toUpperCase());
+                this.estadoBorrar.setText("borrada con exito");
+                this.estadoBorrar.setForeground(COLOR_VERDE);
+                this.estadoBorrar.setVisible(true);
+            } 
+        }else{
+            this.estadoBorrar.setText("La palabra no existe no puedes borrarla");
+            this.estadoBorrar.setForeground(COLOR_ROJO);
+            this.estadoBorrar.setVisible(true);
+        }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
     private void anadirjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirjTextFieldActionPerformed
         
     }//GEN-LAST:event_anadirjTextFieldActionPerformed
+
+    private void borrarjTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarjTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarjTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

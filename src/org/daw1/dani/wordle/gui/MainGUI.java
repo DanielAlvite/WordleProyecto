@@ -16,7 +16,8 @@ import org.daw1.dani.wordle.wordleclass.MotorTest;
 import javax.swing.SwingUtilities;
 import org.daw1.dani.wordle.wordleclass.MotorArchivo;
 import org.daw1.dani.wordle.wordleclass.MotorBD;
-
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author dani
@@ -48,7 +49,12 @@ public  class MainGUI extends javax.swing.JFrame {
         inicializarLabels();
         Objects.requireNonNull(motor);
         this.motor = motor;
-        this.palabra = this.motor.obtenerPalabraAleatoria().getValue().toUpperCase();
+        try {
+            this.palabra = this.motor.obtenerPalabraAleatoria().toUpperCase();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
         this.exitojPanel.setVisible(false);
         this.amarillo.clear();
         this.rojo.clear();
@@ -56,7 +62,8 @@ public  class MainGUI extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setSelected(false);
         jRadioButtonTest.setSelected(true);
         jRadioButtonArchivo.setSelected(false);
-        jRadioButtonBaseDatos.setSelected(false);
+        jRadioButtonBaseDatosESP.setSelected(false);
+        jRadioButtonBaseDatosGAL.setSelected(false);
         jRadioButtonEditarMotor.setSelected(false);
     }
     
@@ -142,7 +149,8 @@ public  class MainGUI extends javax.swing.JFrame {
         jMenuI = new javax.swing.JMenu();
         jRadioButtonTest = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonArchivo = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonBaseDatos = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonBaseDatosESP = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonBaseDatosGAL = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonEditarMotor = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -156,152 +164,122 @@ public  class MainGUI extends javax.swing.JFrame {
 
         jLabel1_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1_1.setText("A");
         letrasPanel.add(jLabel1_1);
 
         jLabel1_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1_2.setText("A");
         letrasPanel.add(jLabel1_2);
 
         jLabel1_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1_3.setText("A");
         letrasPanel.add(jLabel1_3);
 
         jLabel1_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1_4.setText("A");
         letrasPanel.add(jLabel1_4);
 
         jLabel1_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1_5.setText("A");
         letrasPanel.add(jLabel1_5);
 
         jLabel2_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2_1.setText("A");
         letrasPanel.add(jLabel2_1);
 
         jLabel2_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2_2.setText("A");
         letrasPanel.add(jLabel2_2);
 
         jLabel2_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2_3.setText("A");
         letrasPanel.add(jLabel2_3);
 
         jLabel2_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2_4.setText("A");
         letrasPanel.add(jLabel2_4);
 
         jLabel2_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2_5.setText("A");
         letrasPanel.add(jLabel2_5);
 
         jLabel3_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3_1.setText("A");
         letrasPanel.add(jLabel3_1);
 
         jLabel3_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3_2.setText("A");
         letrasPanel.add(jLabel3_2);
 
         jLabel3_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3_3.setText("A");
         letrasPanel.add(jLabel3_3);
 
         jLabel3_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3_4.setText("A");
         letrasPanel.add(jLabel3_4);
 
         jLabel3_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel3_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3_5.setText("A");
         letrasPanel.add(jLabel3_5);
 
         jLabel4_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel4_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4_1.setText("A");
         letrasPanel.add(jLabel4_1);
 
         jLabel4_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel4_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4_2.setText("A");
         letrasPanel.add(jLabel4_2);
 
         jLabel4_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel4_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4_3.setText("A");
         letrasPanel.add(jLabel4_3);
 
         jLabel4_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel4_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4_4.setText("A");
         letrasPanel.add(jLabel4_4);
 
         jLabel4_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel4_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4_5.setText("A");
         letrasPanel.add(jLabel4_5);
 
         jLabel5_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel5_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5_1.setText("A");
         letrasPanel.add(jLabel5_1);
 
         jLabel5_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel5_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5_2.setText("A");
         letrasPanel.add(jLabel5_2);
 
         jLabel5_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel5_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5_3.setText("A");
         letrasPanel.add(jLabel5_3);
 
         jLabel5_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel5_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5_4.setText("A");
         letrasPanel.add(jLabel5_4);
 
         jLabel5_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel5_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5_5.setText("A");
         letrasPanel.add(jLabel5_5);
 
         jLabel6_1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel6_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6_1.setText("A");
         letrasPanel.add(jLabel6_1);
 
         jLabel6_2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel6_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6_2.setText("A");
         letrasPanel.add(jLabel6_2);
 
         jLabel6_3.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel6_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6_3.setText("A");
         letrasPanel.add(jLabel6_3);
 
         jLabel6_4.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel6_4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6_4.setText("A");
         letrasPanel.add(jLabel6_4);
 
         jLabel6_5.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel6_5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6_5.setText("A");
         letrasPanel.add(jLabel6_5);
 
         mainJPanel.add(letrasPanel, java.awt.BorderLayout.CENTER);
@@ -387,6 +365,8 @@ public  class MainGUI extends javax.swing.JFrame {
 
         errorjLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         errorjLabel.setForeground(new java.awt.Color(204, 0, 0));
+        errorjLabel.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        errorjLabel.setMinimumSize(new java.awt.Dimension(191, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -436,14 +416,23 @@ public  class MainGUI extends javax.swing.JFrame {
         });
         jMenuI.add(jRadioButtonArchivo);
 
-        jRadioButtonBaseDatos.setSelected(true);
-        jRadioButtonBaseDatos.setText("BaseDatos");
-        jRadioButtonBaseDatos.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonBaseDatosESP.setSelected(true);
+        jRadioButtonBaseDatosESP.setText("BaseDatos_ESPAÑOL");
+        jRadioButtonBaseDatosESP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonBaseDatosActionPerformed(evt);
+                jRadioButtonBaseDatosESPActionPerformed(evt);
             }
         });
-        jMenuI.add(jRadioButtonBaseDatos);
+        jMenuI.add(jRadioButtonBaseDatosESP);
+
+        jRadioButtonBaseDatosGAL.setSelected(true);
+        jRadioButtonBaseDatosGAL.setText("BaseDatos_GALEGO");
+        jRadioButtonBaseDatosGAL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBaseDatosGALActionPerformed(evt);
+            }
+        });
+        jMenuI.add(jRadioButtonBaseDatosGAL);
 
         jRadioButtonEditarMotor.setSelected(true);
         jRadioButtonEditarMotor.setText("Administrar motor");
@@ -462,7 +451,7 @@ public  class MainGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+            .addComponent(mainJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,7 +469,7 @@ public  class MainGUI extends javax.swing.JFrame {
         this.errorjLabel.setText("");
         String insertada = this.palabrajTextField.getText().toUpperCase();
         if (insertada.length() != 5) {
-            this.errorjLabel.setText("Inserte una palabra de 5 letras");
+            this.errorjLabel.setText("palabras de 5 letras");
         }
         else if (this.motor.checkPalabra(insertada)) {
             procesarPalabraInterfaz(insertada, numeroIntentos);
@@ -508,7 +497,7 @@ public  class MainGUI extends javax.swing.JFrame {
             }
         }
         else {
-            this.errorjLabel.setText("La palabra insertada no existe");
+            this.errorjLabel.setText("La palabra no existe");
         }
     }//GEN-LAST:event_enviarjButton1ActionPerformed
 
@@ -516,6 +505,8 @@ public  class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_palabrajTextFieldActionPerformed
 
+        
+    //Boton de nueva Partida
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
         if(jRadioButtonMenuItem1.isSelected()){
            jRadioButtonMenuItem1.setSelected(false);
@@ -527,7 +518,12 @@ public  class MainGUI extends javax.swing.JFrame {
         if(this.jRadioButtonTest.isSelected()){
           this.motor = new MotorTest();
           this.jRadioButtonArchivo.setSelected(false);
-          this.jRadioButtonBaseDatos.setSelected(false);
+          this.jRadioButtonBaseDatosESP.setSelected(false);
+          this.jRadioButtonBaseDatosGAL.setSelected(false);
+          this.jRadioButtonTest.setEnabled(false);
+          this.jRadioButtonArchivo.setEnabled(true);
+          this.jRadioButtonBaseDatosESP.setEnabled(true);
+          this.jRadioButtonBaseDatosGAL.setEnabled(true);
           resetJuego();
       }
     }//GEN-LAST:event_jRadioButtonTestActionPerformed
@@ -536,19 +532,30 @@ public  class MainGUI extends javax.swing.JFrame {
        if(this.jRadioButtonArchivo.isSelected()){
           this.motor = new MotorArchivo();
           this.jRadioButtonTest.setSelected(false);
-          this.jRadioButtonBaseDatos.setSelected(false);
+          this.jRadioButtonBaseDatosESP.setSelected(false);
+          this.jRadioButtonBaseDatosGAL.setSelected(false);
+          this.jRadioButtonArchivo.setEnabled(false);
+          this.jRadioButtonTest.setEnabled(true);
+          this.jRadioButtonBaseDatosESP.setEnabled(true);
+          this.jRadioButtonBaseDatosGAL.setEnabled(true);
+           
           resetJuego();
       }
     }//GEN-LAST:event_jRadioButtonArchivoActionPerformed
 
-    private void jRadioButtonBaseDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBaseDatosActionPerformed
-        if(this.jRadioButtonBaseDatos.isSelected()){
-          this.motor = new MotorBD();
+    private void jRadioButtonBaseDatosESPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBaseDatosESPActionPerformed
+        if(this.jRadioButtonBaseDatosESP.isSelected()){
+          this.motor = new MotorBD("ESPAÑOL");
           this.jRadioButtonArchivo.setSelected(false);
           this.jRadioButtonTest.setSelected(false);
+          this.jRadioButtonBaseDatosGAL.setSelected(false);
+          this.jRadioButtonBaseDatosESP.setEnabled(false);
+           this.jRadioButtonArchivo.setEnabled(true);
+          this.jRadioButtonTest.setEnabled(true);
+          this.jRadioButtonBaseDatosGAL.setEnabled(true);
           resetJuego();
       }
-    }//GEN-LAST:event_jRadioButtonBaseDatosActionPerformed
+    }//GEN-LAST:event_jRadioButtonBaseDatosESPActionPerformed
 
     private void jRadioButtonEditarMotorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEditarMotorActionPerformed
         if(this.jRadioButtonEditarMotor.isSelected()){
@@ -557,22 +564,45 @@ public  class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jRadioButtonEditarMotorActionPerformed
 
+    private void jRadioButtonBaseDatosGALActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBaseDatosGALActionPerformed
+        if(this.jRadioButtonBaseDatosGAL.isSelected()){
+          this.motor = new MotorBD("GALLEGO");
+          this.jRadioButtonArchivo.setSelected(false);
+          this.jRadioButtonTest.setSelected(false);
+          this.jRadioButtonBaseDatosESP.setSelected(false);
+          this.jRadioButtonBaseDatosGAL.setEnabled(false);
+          this.jRadioButtonBaseDatosESP.setEnabled(true);
+           this.jRadioButtonArchivo.setEnabled(true);
+          this.jRadioButtonTest.setEnabled(true);
+          resetJuego();
+      }
+    }//GEN-LAST:event_jRadioButtonBaseDatosGALActionPerformed
+
     private void resetJuego(){
+      try{
         for(int i = 1;i <= MAX_INTENTOS;i++){
             for(int j = 1;j <= TAMANO_PALABRA;j++){
-                labels[i-1][j-1].setText("A");
-                labels[i-1][j-1].setForeground(COLOR_DEFAULT);
+                labels[i-1][j-1].setText("");  
             }
         }
+        this.palabra = this.motor.obtenerPalabraAleatoria().toUpperCase();
+        verde.clear();
+        amarillo.clear();
+        rojo.clear();
         this.enviarjButton1.setEnabled(true);
         this.palabrajTextField.setEnabled(true);
         this.exitojPanel.setVisible(false);
         this.finaljLabel.setVisible(false);
+        this.MaljLabel.setText("");
+        this.ExistenjLabel.setText("");
+        this.BienjLabel.setText("");
         this.numeroIntentos = 0;
-    }
-    
-    public static IMotor getTipoMotor(){
-        return motor;
+    }catch (SQLException ex) {
+            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+        
     }
 
     
@@ -603,22 +633,12 @@ public  class MainGUI extends javax.swing.JFrame {
             }
         }
     }
-     
-     
-     
-    
-    
-    
+  
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
+      try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -637,6 +657,13 @@ public  class MainGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainGUI().setVisible(true);
+            }
+        });
+    
+    
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainGUI().setVisible(true);
@@ -692,7 +719,8 @@ public  class MainGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuI;
     private javax.swing.JRadioButtonMenuItem jRadioButtonArchivo;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonBaseDatos;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonBaseDatosESP;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonBaseDatosGAL;
     private javax.swing.JRadioButtonMenuItem jRadioButtonEditarMotor;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonTest;
