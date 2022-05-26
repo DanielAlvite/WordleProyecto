@@ -58,7 +58,7 @@ public class MotorArchivo implements IMotor{
         if(existeArchivo() && !checkPalabra(texto) && existeCarpetaPadre()){
             try(Writer wr = new BufferedWriter(new FileWriter(ruta, true))){
                 wr.write("\n"+texto.toUpperCase());
-                palabra.add(texto);
+                palabra.add(texto.toUpperCase());
                 return true;
             } catch (IOException ex) {
                 Logger.getLogger(MotorArchivo.class.getName()).log(Level.SEVERE, null, ex);
