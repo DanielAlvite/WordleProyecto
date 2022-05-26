@@ -477,6 +477,7 @@ public  class MainGUI extends javax.swing.JFrame {
             if (insertada.equals(this.palabra)) {
                 this.exitojPanel.setVisible(true);
                 this.finaljLabel.setText("Ganaste en " + numeroIntentos + " intentos");
+                this.finaljLabel.setForeground(MainGUI.COLOR_VERDE);
                 this.finaljLabel.setVisible(true);
                 this.enviarjButton1.setEnabled(false);
                 this.palabrajTextField.setEnabled(false);
